@@ -1,0 +1,21 @@
+{
+  "name": "queue-api",
+  "version": "1.0.0",
+  "main": "src/server.js",
+  "author": "Debora de Oliveira",
+  "license": "MIT",
+  "scripts": {
+    "dev": "nodemon -r esm -r module-alias/register src/server.js"
+  },
+  "_moduleAliases": {
+    "~": "./src"
+  },
+  "dependencies": {
+    "esm": "^3.2.25",
+    "express": "^4.17.1",
+    "module-alias": "^2.2.2"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.12"
+  }
+}
