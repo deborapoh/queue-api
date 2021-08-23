@@ -5,17 +5,40 @@
   "author": "Debora de Oliveira",
   "license": "MIT",
   "scripts": {
-    "dev": "nodemon -r esm -r module-alias/register src/server.js"
+    "lint": "standard ./**/*.js",
+    "dev": "nodemon -r esm -r module-alias/register -r dotenv/config src/server.js",
+    "serve": "node -r esm -r module-alias/register -r dotenv/config src/server.js",
+    "test": "jest --setupFiles dotenv/config --runInBand --coverage"
   },
   "_moduleAliases": {
     "~": "./src"
   },
+  "standard": {
+    "ignore": [
+      "__mocks__"
+    ],
+    "env": [
+      "jest"
+    ]
+  },
   "dependencies": {
+    "aws-sdk": "^2.973.0",
+    "dotenv": "^10.0.0",
     "esm": "^3.2.25",
     "express": "^4.17.1",
     "module-alias": "^2.2.2"
   },
   "devDependencies": {
-    "nodemon": "^2.0.12"
+    "@babel/preset-env": "^7.15.0",
+    "eslint": "^7.32.0",
+    "eslint-config-standard": "^16.0.3",
+    "eslint-plugin-import": "^2.24.1",
+    "eslint-plugin-jest": "^24.4.0",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^5.1.0",
+    "jest": "^27.0.6",
+    "nodemon": "^2.0.12",
+    "standard": "^16.0.3",
+    "supertest": "^6.1.6"
   }
 }

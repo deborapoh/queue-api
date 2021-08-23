@@ -1,5 +1,8 @@
 import app from '~/app'
+import constants from '~/config/constants'
 
-app.listen(3000, () => {
-  console.log('App serving on port 3000...')
+const { GENERAL: { API_PORT } } = constants
+
+app.listen(API_PORT, () => {
+  console.log(`App serving on port ${API_PORT}...`)
 })
