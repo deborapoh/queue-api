@@ -9,6 +9,7 @@ This API is to be used as a queue producer/consumer service
 - [Quick Start](#quick-start)
 - [API Reference](#api-reference)
 - [Tests](#tests)
+- [Deploying to production](#deploying-to-production)
 - [License](#license)
 
 # Motivation
@@ -88,11 +89,22 @@ This project was created as a test for a startup company
 
 # API Reference
 
-You can import the Postman Collection [here](./docs/test.postman)
+You can find Postman documentation [here](https://documenter.getpostman.com/view/1786741/TzzEmtLn)
 
 
 # Tests
-To be implemented
+    ```bash
+      # to test application
+      yarn test
+    ```
+
+
+# Deploying to production
+  When deploying the queue, if there is need for scale. One can go to a few directions:
+
+    - Horizontal Scale which will increase de number of message producers. You can increase the number of threads per client, add more clients, or increase the number of threads per client and add more clients.
+
+    - You can also create a auto scaling group to manage EC2 instances, together with a Amazon CloudWatch that measures the number of messages in the queue per EC2 instance in the Auto Scaling group and an alarm that invokes the scaling policy.
 
 
 # License
