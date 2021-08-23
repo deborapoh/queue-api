@@ -1,21 +1,30 @@
 import express from 'express'
 
+import { receiveMessage, sendMessage } from '~/controllers/message'
+
 const router = express.Router()
 
-// middleware?????????
-router.get('/consume', async (req, res) => {
+router.get('/', async (req, res) => {
   try {
-    res.status(200).send({ msg: 'message consumed' })
+    await receiveMessage(req.body.message)
+
+    res.status(200).send({
+      message: 'messages received',
+      statusText: 'OK'
+    })
   } catch (error) {
+    console.log('erro rota', error)
     res.status(500).send({ error: 'some error' })
   }
 })
 
-router.get('/produce', async (req, res) => {
+router.post('/', async (req, res) => {
   try {
-    res.status(200).send({ msg: 'message produced' })
+    const messageId = await sendMessage(req.body.message)
+    res.status(201).send({ messageId, statusText: 'Created' })
   } catch (error) {
-    res.status(500).send({ error: 'some error' })
+    console.log('erro rota', error)
+    res.status(500).send()
   }
 })
 
