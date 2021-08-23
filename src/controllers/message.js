@@ -31,10 +31,12 @@ export const receiveMessage = async () => {
 
 export const sendMessage = async message => {
   try {
+    const { QUEUE: { url, messageGroupId } } = constants
+
     const { MessageId } = await sqs.sendMessage({
       MessageBody: message,
-      QueueUrl: constants.QUEUE.url,
-      MessageGroupId: 'testGroupId',
+      QueueUrl: url,
+      MessageGroupId: messageGroupId,
       MessageDeduplicationId: 'testMessageDeduplicationId'
     }).promise()
 
