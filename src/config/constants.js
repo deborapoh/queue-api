@@ -1,4 +1,7 @@
 export default {
+  GENERAL: {
+    API_PORT: process.env.API_PORT
+  },
   AWS_CREDENTIALS: {
     accessKeyId: process.env.AWS_ACCESS_KEY_ID,
     secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY

@@ -1,12 +1,15 @@
 import express from 'express'
 
+import { HttpOK } from '~/http-responses/20X'
+
 const router = express.Router()
 
-router.get('/healthcheck', async (req, res) => {
+router.get('/healthcheck', async (req, res, next) => {
   try {
-    res.status(200).send({ status: 'OK' })
+    const httpResponse = new HttpOK()
+    res.status(httpResponse.statusCode).send(httpResponse)
   } catch (error) {
-    res.status(500).send({ error: 'some error' })
+    next()
   }
 })
 

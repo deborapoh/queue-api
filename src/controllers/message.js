@@ -8,7 +8,6 @@ export const deleteMessage = async receiptHandle => {
       ReceiptHandle: receiptHandle
     }).promise()
 
-    console.log('deleted', data)
     return data
   } catch (error) {
     throw new Error(error)
@@ -23,8 +22,6 @@ export const receiveMessage = async () => {
       QueueUrl: url,
       MaxNumberOfMessages: maxNumberOfMessages
     }).promise()
-
-    console.log('data', data)
 
     const messageIdsReceived = data.Messages
       ? data.Messages.map(message => {
