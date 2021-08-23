@@ -5,7 +5,7 @@ export const getQueueUrl = async queueName => {
     const { QueueUrl } = await sqs.getQueueUrl({ QueueName: queueName }).promise()
     return QueueUrl
   } catch (error) {
-    if (error.code != 'AWS.SimpleQueueService.NonExistentQueue') {
+    if (error.code !== 'AWS.SimpleQueueService.NonExistentQueue') {
       throw new Error(error)
     }
   }

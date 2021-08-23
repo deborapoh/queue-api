@@ -19,16 +19,22 @@ export const receiveMessage = async () => {
   try {
     const { QUEUE: { url, maxNumberOfMessages } } = constants
 
-    const data = await sqs.receiveMessage({ QueueUrl: url, MaxNumberOfMessages: maxNumberOfMessages }).promise()
+    const data = await sqs.receiveMessage({
+      QueueUrl: url,
+      MaxNumberOfMessages: maxNumberOfMessages
+    }).promise()
+
     console.log('data', data)
 
-    const messageIdsReceived = data.Messages ? data.Messages.map(message => {
-      deleteMessage(message.ReceiptHandle)
-      return {
-        messageId: message.MessageId,
-        body: message.Body
-      }
-    }) : []
+    const messageIdsReceived = data.Messages
+      ? data.Messages.map(message => {
+          deleteMessage(message.ReceiptHandle)
+          return {
+            messageId: message.MessageId,
+            body: message.Body
+          }
+        })
+      : []
 
     return messageIdsReceived
   } catch (error) {
