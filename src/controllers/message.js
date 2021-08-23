@@ -8,7 +8,7 @@ export const deleteMessage = async receiptHandle => {
       ReceiptHandle: receiptHandle
     }).promise()
 
-    console.log('data deleted', data)
+    console.log('deleted', data)
     return data
   } catch (error) {
     throw new Error(error)
@@ -18,12 +18,17 @@ export const deleteMessage = async receiptHandle => {
 export const receiveMessage = async () => {
   try {
     const data = await sqs.receiveMessage({ QueueUrl: constants.QUEUE.url, MaxNumberOfMessages: 10 }).promise()
-    console.log('messages received', data)
+    console.log('data', data)
 
-    const messagesToBeDeleted = data.Messages.map(message => message.ReceiptHandle)
-    console.log('messagesToBeDeleted', messagesToBeDeleted)
+    const messageIdsReceived = data.Messages ? data.Messages.map(message => {
+      deleteMessage(message.ReceiptHandle)
+      return {
+        messageId: message.MessageId,
+        body: message.Body
+      }
+    }) : []
 
-    messagesToBeDeleted.forEach(receiptHandle => deleteMessage(receiptHandle))
+    return messageIdsReceived
   } catch (error) {
     throw new Error(error)
   }

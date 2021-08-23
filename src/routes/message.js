@@ -6,15 +6,16 @@ const router = express.Router()
 
 router.get('/', async (req, res) => {
   try {
-    await receiveMessage(req.body.message)
+    const messageIdsReceived = await receiveMessage(req.body.message)
+    console.log('messageIdsReceived', messageIdsReceived)
 
     res.status(200).send({
-      message: 'messages received',
+      messageIdsReceived,
       statusText: 'OK'
     })
   } catch (error) {
     console.log('erro rota', error)
-    res.status(500).send({ error: 'some error' })
+    res.status(500).send({ error })
   }
 })
 
@@ -24,7 +25,7 @@ router.post('/', async (req, res) => {
     res.status(201).send({ messageId, statusText: 'Created' })
   } catch (error) {
     console.log('erro rota', error)
-    res.status(500).send()
+    res.status(500).send({ error })
   }
 })
 
