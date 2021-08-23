@@ -79,8 +79,11 @@ This project was created as a test for a startup company
       yarn lint --fix
     ```
 
+5. Use the endpoint to create a queue.
 
-5. Access [AWS SQS Console](https://console.aws.amazon.com/sqs) to watch your messages
+      5.1 Place your `QUEUE_URL` in your `.env` file
+
+6. Access [AWS SQS Console](https://console.aws.amazon.com/sqs) to watch your messages
 
 
 # API Reference
