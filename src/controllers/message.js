@@ -36,8 +36,7 @@ export const sendMessage = async message => {
     const { MessageId } = await sqs.sendMessage({
       MessageBody: message,
       QueueUrl: url,
-      MessageGroupId: messageGroupId,
-      MessageDeduplicationId: 'testMessageDeduplicationId'
+      MessageGroupId: messageGroupId
     }).promise()
 
     return MessageId

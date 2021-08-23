@@ -16,7 +16,8 @@ export const createQueue = async queueName => {
     const { QueueUrl } = await sqs.createQueue({
       QueueName: queueName,
       Attributes: {
-        FifoQueue: 'true'
+        FifoQueue: 'true',
+        ContentBasedDeduplication: 'true'
       }
     }).promise()
 
