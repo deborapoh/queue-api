@@ -1,10 +1,10 @@
 import { sqs } from '~/config/aws'
-import { QUEUE_URL } from '~/config/constants'
+import constants from '~/config/constants'
 
 export const deleteMessage = async receiptHandle => {
   try {
     const data = await sqs.deleteMessage({
-      QueueUrl: QUEUE_URL,
+      QueueUrl: constants.QUEUE.url,
       ReceiptHandle: receiptHandle
     }).promise()
 
@@ -17,7 +17,7 @@ export const deleteMessage = async receiptHandle => {
 
 export const receiveMessage = async () => {
   try {
-    const data = await sqs.receiveMessage({ QueueUrl: QUEUE_URL, MaxNumberOfMessages: 10 }).promise()
+    const data = await sqs.receiveMessage({ QueueUrl: constants.QUEUE.url, MaxNumberOfMessages: 10 }).promise()
     console.log('messages received', data)
 
     const messagesToBeDeleted = data.Messages.map(message => message.ReceiptHandle)
@@ -33,7 +33,7 @@ export const sendMessage = async message => {
   try {
     const { MessageId } = await sqs.sendMessage({
       MessageBody: message,
-      QueueUrl: QUEUE_URL,
+      QueueUrl: constants.QUEUE.url,
       MessageGroupId: 'testGroupId',
       MessageDeduplicationId: 'testMessageDeduplicationId'
     }).promise()
