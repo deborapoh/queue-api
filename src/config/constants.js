@@ -5,6 +5,7 @@ export default {
   },
   QUEUE: {
     url: process.env.QUEUE_URL,
-    messageGroupId: process.env.MESSAGE_GROUP_ID
+    messageGroupId: process.env.MESSAGE_GROUP_ID,
+    maxNumberOfMessages: process.env.MAX_NUMBER_OF_MESSAGES
   }
 }

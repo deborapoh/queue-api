@@ -17,7 +17,9 @@ export const deleteMessage = async receiptHandle => {
 
 export const receiveMessage = async () => {
   try {
-    const data = await sqs.receiveMessage({ QueueUrl: constants.QUEUE.url, MaxNumberOfMessages: 10 }).promise()
+    const { QUEUE: { url, maxNumberOfMessages } } = constants
+
+    const data = await sqs.receiveMessage({ QueueUrl: url, MaxNumberOfMessages: maxNumberOfMessages }).promise()
     console.log('data', data)
 
     const messageIdsReceived = data.Messages ? data.Messages.map(message => {
